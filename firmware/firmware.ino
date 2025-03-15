@@ -12,11 +12,16 @@ void loop() {
     String input = Serial.readString();
     input.trim();
     int inputInt = input.toInt();
-    Serial.println("Changing mode to " + (String)inputInt);
     if (inputInt >= 0 && inputInt < 3) {
       Serial.println("Changing mode to " + (String)inputInt);
       uint8_t dataToSend = inputInt;
       sendData(&dataToSend, 1);
+    } else if (inputInt >= 50 && inputInt <= 10000) {
+      Serial.println("Changing satellite measurement interval to " + (String)inputInt);
+      unsigned short int newInterval = inputInt;
+      uint8_t package[2];
+      memcpy(&package[0], &newInterval, 2);
+      sendData(&package, 2);
     }
   }
 }
