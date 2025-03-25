@@ -2,6 +2,7 @@
 
 void setup() {
   Serial.begin(115200);
+  setRadioChannel(7);
   GroundStationInit(42);
   Serial.println("READY");
 }
